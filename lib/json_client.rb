@@ -1,8 +1,8 @@
-# https://github.com/metaslim/rainforest/blob/main/rainforest.rb
-
-require 'uri'
-require 'net/http'
 require 'json'
+require 'net/http'
+require 'uri'
+
+require_relative './node'
 
 class JSONClient
   def self.query(url)
@@ -39,33 +39,4 @@ class JSONClient
     puts "An error occurred: #{error.message}"
     Node.new
   end
-end
-
-class Node
-  attr_reader :message, :follow
-
-  def initialize(message = nil, follow = nil)
-    @message = message
-    @follow = follow
-  end
-
-  def end?
-    message != 'This is not the end'
-  end
-end
-
-
-def run(url) 
-  node = JSONClient.query(url)
-
-  while !node.end?
-    puts "#{node.message}, so accessing #{node.follow}"
-    sleep(0.1)
-    node = JSONClient.query(node.follow)
-  end
-
-  puts node.message
-  puts node.follow
-
-  return node
 end

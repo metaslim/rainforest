@@ -1,5 +1,5 @@
 require 'webmock/rspec'
-require_relative '../rainforest'
+require_relative '../lib/helper'
 
 SAMPLE_URL = 'https://www.letsrevolutionizetesting.com/challenge?id='
 NOT_END_MESSAGE = 'This is not the end'
